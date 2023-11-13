@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <title>App</title>
+    </head>
+
+    <body>
+        
+
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        
+        <section class="layout">
+            <div class="header">
+                <h1>Welcome</h1>
+            </div>
+            
+
+            <div class="main">
+                {% block content %}{% endblock %}
+            </div>
+            
+            
+
+            <div class="footer">Contact-us</div>
+          </section>
+          
+    </body>
+</html>

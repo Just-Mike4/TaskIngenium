@@ -3,46 +3,64 @@
     <head>
         <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <title>{{ title }}</title>
         
-          <header>{{title}}
-            <div class="container">
-                <nav>
-                <ul class="bar">
-                  <li><a href="/">Home</a></li>
-                  <li><a href="login">Login</a></li>
-                  <li><a href="signup">Signup</a></li>
-                  
-                  <li><a href="#">Tasks</a></li>
-                  <li><a href="#">Logout</a></li>
-                  <li><a href="account">Account</a></li>
-
+        <nav class="navbar navbar-default navbar-expand-lg fixed-top custom-navbar">
+            <h1> {{ title }} </h1>
+            <ul class="navbar-nav ml-auto nav-right" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+                  <li class="nav-item nav-custom-link">
+                    <a class="nav-link" href="/">Home <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                  </li>
+                  <li class="nav-item nav-custom-link">
+                    <a class="nav-link" href="account">Account <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                  </li>
+                  <li class="nav-item nav-custom-link">
+                    <a class="nav-link" href="signup">Signup <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                  </li>
+                  <li class="nav-item nav-custom-link">
+                    <a class="nav-link" href="login">Login <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                  </li>
+                  <li class="nav-item nav-custom-link">
+                    <a class="nav-link" href="#">Logout <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                  </li>
                 </ul>
-                </nav>
               </div>
-          </header>
-          
+            </div>
+          </nav>
           
     </head>
 
     <body>
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
         
+  <!-- N A V B A R -->
+  
        
             
 
-            <main>
+            <section>
                 {% block content %}{% endblock %}
-            </main>
+            </section>
+               
+           
                 
            
             
             
-
+            <footer>
+        
+                <div class="col-md-3">
+                  <h5>Company</h5>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque, tortor nec mattis feugiat, velit purus euismod odio, quis vulputate velit urna.</p>
+                  <p><a href="mailto:sales@theseocompany.com" class="external-links">sales@theseocompany.com</a></p>
+                </div>
+              </div> 
+              
+            </div>
+          </footer>
            
           
     </body>

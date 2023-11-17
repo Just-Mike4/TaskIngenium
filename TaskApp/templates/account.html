@@ -1,4 +1,66 @@
 {% extends "layout.html" %}
 {% block content %}
+    
+<div class="content-section">
+    <div class="media">
+     <div class="media-body">
+        <h2 class="account-heading">{{ current_user.username }}</h2>
+        <p class="text-secondary">{{ current_user.email }}</p>
+      </div>
+    </div>
+    
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Account Info</legend>
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
 
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+<h2>Delete Account</h2>
+<form method="POST", action="/delete_account" id="delete-account-form">
+    <button type="button" onclick="confirmDelete()" >Delete Account</button>
+</form>
+<input type="hidden" id="user-username" value="{{ current_user.username }}">
+  </div>
+  <script>
+    function confirmDelete() {
+const username = document.getElementById('user-username').value; // Get the user's username
+if (confirm(`Are you sure you want to delete your account with username: "${username}"?`)) {
+    // If the user clicks "OK" in the confirmation dialog, the form will be submitted.
+    document.querySelector('#delete-account-form').submit();
+} else {
+    // If the user clicks "Cancel" in the confirmation dialog, nothing happens.
+}
+}
+</script>
 {% endblock content %}

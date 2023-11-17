@@ -45,11 +45,10 @@ class User(db.Model, UserMixin):
 
 
 class Task(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    task_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     due_date=db.Column(db.DateTime, nullable=False)
-    completed=db.Column(db.Boolean, nullable=False, default="No")
     description = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 

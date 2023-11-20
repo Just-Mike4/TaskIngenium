@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,TextAreaField, DateTimeField,SubmitField, IntegerField
+from wtforms import StringField,TextAreaField, SubmitField, SelectField,DateTimeLocalField
 from wtforms.validators import DataRequired
 
 class TaskForm(FlaskForm):
-    title=StringField("Title", validators=[DataRequired()])
-    description=TextAreaField("Description", validators=[DataRequired()])
-    due_date=DateTimeField("Due_Date", validators=[DataRequired()])
-    importance=IntegerField("Importance", validators=[DataRequired()])
-    submit=SubmitField("Task")
+    title = StringField("Title", validators=[DataRequired()])
+    description = TextAreaField("Description", validators=[DataRequired()])
+    due_date = DateTimeLocalField("Due_Date", validators=[DataRequired()], format='%Y-%m-%dT%H:%M')
+    importance = SelectField("Importance", choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], coerce=int, validators=[DataRequired()])
+    submit=SubmitField("Create Task")

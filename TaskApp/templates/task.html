@@ -1,4 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<div class="content-section">
+    <h2>{{ task.title }}</h2>
+    <p>{{ task.description }}</p>
+    <p><strong>Importance:</strong> {{ task.importance }}</p>
+    <p><strong>Due Date:</strong> {{ task.due_date }}</p>
+</div>
+<a href="{{ url_for('tasks.update_task', task_id=task.task_id) }}" class="btn btn-primary">Update Task</a>
+        
+<a href="{{ url_for('tasks.delete_task', task_id=task.task_id) }}" class="btn btn-primary">Delete Task</a>
+   
 {% endblock content %}

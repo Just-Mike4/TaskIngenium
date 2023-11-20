@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from TaskApp import db, bcrypt
-from TaskApp.models import User, Post
+from TaskApp.models import User
 from TaskApp.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm)
 from TaskApp.users.utils import send_reset_email
@@ -20,7 +20,7 @@ def signup():
         db.session.add(user)
         db.session.commit()
         flash('Your Account has been Created! You are now able to  Login ', 'success')
-        return redirect(url_for('user.login'))
+        return redirect(url_for('users.login'))
     return render_template('signup.html', title='Register',form=form)
 
 @users.route("/login",methods=['GET','POST'])
@@ -60,7 +60,6 @@ def account():
          form.username.data= current_user.username
          form.email.data = current_user.email
         
-     image_file=url_for('static',filename='profile_pics/' + current_user.image_file)
      return render_template('account.html', title='Account',
                               form=form)
 

@@ -11,21 +11,35 @@
         <nav class="navbar navbar-default navbar-expand-lg fixed-top custom-navbar">
             <h1> {{ title }} </h1>
             <ul class="navbar-nav ml-auto nav-right" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
-                  <li class="nav-item nav-custom-link">
-                    <a class="nav-link" href="/">Home <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
-                  </li>
-                  <li class="nav-item nav-custom-link">
-                    <a class="nav-link" href="account">Account <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
-                  </li>
-                  <li class="nav-item nav-custom-link">
-                    <a class="nav-link" href="signup">Signup <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
-                  </li>
-                  <li class="nav-item nav-custom-link">
-                    <a class="nav-link" href="login">Login <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
-                  </li>
-                  <li class="nav-item nav-custom-link">
-                    <a class="nav-link" href="#">Logout <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
-                  </li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item nav-custom-link">
+                  <a class="nav-link" href="{{ url_for('main.home')}}">Home <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                </li>
+                <li class="nav-item nav-custom-link">
+                  <a class="nav-link" href="{{ url_for('users.account')}}">Account <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                </li>
+                <li class="nav-item nav-custom-link">
+                  <a class="nav-link" href="{{ url_for('tasks.task_list')}}">tasks<i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                </li>
+                <li class="nav-item nav-custom-link">
+                  <a class="nav-link" href="{{ url_for('users.logout')}}">Logout <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                </li>
+
+                {% else %}
+                <li class="nav-item nav-custom-link">
+                  <a class="nav-link" href="{{ url_for('main.home')}}">Home <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                </li>
+                <li class="nav-item nav-custom-link">
+                  <a class="nav-link" href="{{ url_for('users.signup')}}">Signup <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                </li>
+                <li class="nav-item nav-custom-link">
+                  <a class="nav-link" href="{{ url_for('users.login')}}">Login <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                </li>
+                {% endif %}
+                  
+
+
+                  
                 </ul>
               </div>
             </div>
@@ -42,6 +56,16 @@
             
 
             <section>
+              {% with messages= get_flashed_messages(with_categories=True) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                 <div class="alert alert-{{ category }}">
+                {{ message }}
+
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
                 {% block content %}{% endblock %}
             </section>
                

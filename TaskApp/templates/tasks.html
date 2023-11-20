@@ -1,4 +1,27 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="content-section">
+
+        <h2>Your Tasks</h2>
+        {% if tasks==[] %}
+        <p>No tasks created yet</p>
+        <a href="{{ url_for('tasks.create_task') }}" class="btn btn-primary">Create New Task</a>
+        {% else %}
+        
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <li>
+                        <h3><a href="{{ url_for('tasks.task', task_id=task.task_id) }}" class="task-title">{{ task.title }}</a></h3>
+                        <p class="task-description">{{ task.description }}</p>
+                    </li>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('tasks.create_task') }}" class="btn btn-primary">Create New Task</a>
+        
+        {% endif %}
+</div>
+
 
 {% endblock content %}

@@ -1,10 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
+
 <!-- Div Section for task list -->
 <div class="content-section">
 
         <h2>Your Tasks</h2>
+
+        <!-- Current time -->
+        <p>Current time :<span id="datetime"></span> </p>
         <!-- No task created -->
+        
         {% if tasks==[] %}
         <p>No tasks created yet</p>
         <!-- Button to create new task -->
@@ -26,6 +31,6 @@
         
         {% endif %}
 </div>
-
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 {% endblock content %}

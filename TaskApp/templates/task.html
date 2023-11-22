@@ -3,9 +3,10 @@
 <!-- Displaying the task and information related to it -->
 <div class="content-section">
     <h2>{{ task.title }}</h2>
+    <p>Current time :<span id="datetime"></span> </p>
     <p>{{ task.description }}</p>
-    <p><strong>Importance:</strong>Importance: {{ task.importance }}</p>
-    <p><strong>Due Date:</strong>Due Date: {{ task.due_date }}</p>
+    <p><strong>Importance:</strong> {{ task.importance }}</p>
+    <p><strong>Due Date:</strong>{{ task.due_date }}</p>
 </div>
 <!-- Update task button -->
 <a href="{{ url_for('tasks.update_task', task_id=task.task_id) }}" class="btn btn-primary">Update Task</a>
@@ -13,4 +14,6 @@
 <!-- Delete task button -->
 <a href="{{ url_for('tasks.delete_task', task_id=task.task_id) }}" class="btn btn-primary">Delete Task</a>
    
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 {% endblock content %}

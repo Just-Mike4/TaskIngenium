@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from TaskApp.fig import Config
+#Main application loader and useful classes and functions
 
 mail=Mail()
 db = SQLAlchemy()
@@ -15,7 +16,7 @@ login_manager.login_message_category='info'
 mail=Mail()
 
 
-
+#The TaskGenius flask Application package
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)

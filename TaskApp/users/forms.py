@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 from flask_login import current_user
 from TaskApp.models import User
 
-
+#The user signup form
 class RegistrationForm(FlaskForm):
     username= StringField('Username',
                           validators=[DataRequired(),
@@ -30,7 +30,7 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError("That Email is Taken. Please choose a different one")
 
-
+#The user login form 
 class LoginForm(FlaskForm):
     email= StringField('Email',
                        validators=[DataRequired(),
@@ -41,7 +41,7 @@ class LoginForm(FlaskForm):
     submit= SubmitField('Login')
 
 
-
+#User account form
 class UpdateAccountForm(FlaskForm):
     username= StringField('Username',
                           validators=[DataRequired(),
@@ -65,6 +65,7 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError("That Email is Taken. Please choose a different one")
 
+#User reset request form
 class RequestResetForm(FlaskForm):
     email= StringField('Email',
                        validators=[DataRequired(),
@@ -75,6 +76,7 @@ class RequestResetForm(FlaskForm):
         if user is None:
             raise ValidationError("There is no account with that email. You must register first")
 
+#User reset password form
 class ResetPasswordForm(FlaskForm):
     password= PasswordField('Password',validators=[DataRequired()])
 

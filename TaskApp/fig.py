@@ -1,5 +1,5 @@
 import os
-
+#Config class that will be called to create the application with the following configurations
 class Config():
     SECRET_KEY = 'bda6feb17068a6d336e073324979f281'
     SQLALCHEMY_DATABASE_URI ='sqlite:///Task.db' 

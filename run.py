@@ -1,6 +1,6 @@
 from TaskApp import create_app
 
-
+#Run the application
 app=create_app()
 
 if __name__ == '__main__':

@@ -3,11 +3,14 @@
     <head>
         <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+        <!-- Bootstrap css -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <title>{{ title }}</title>
-        
+        <!-- Navigation bar -->
         <nav class="navbar navbar-default navbar-expand-lg fixed-top custom-navbar">
             <h1> {{ title }} </h1>
             <ul class="navbar-nav ml-auto nav-right" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
@@ -48,13 +51,13 @@
     </head>
 
     <body>
-        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+       
         
   <!-- N A V B A R -->
   
        
             
-
+            <!-- Flashed messages -->
             <section>
               {% with messages= get_flashed_messages(with_categories=True) %}
               {% if messages %}
@@ -66,6 +69,7 @@
                 {% endfor %}
               {% endif %}
             {% endwith %}
+            <!-- Block content section where all html are liked to the layout -->
                 {% block content %}{% endblock %}
             </section>
                

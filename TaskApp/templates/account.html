@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    
+<!-- The main div section to display the users current email and name -->
 <div class="content-section">
     <div class="media">
      <div class="media-body">
@@ -8,11 +8,13 @@
         <p class="text-secondary">{{ current_user.email }}</p>
       </div>
     </div>
-    
+        <!-- The form field container -->
         <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Account Info</legend>
+
+                <!-- The username update form -->
                 <div class="form-group">
                     {{ form.username.label(class="form-control-label") }}
 
@@ -27,6 +29,8 @@
                         {{ form.username(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
+
+                <!-- The password update form -->
                 <div class="form-group">
                     {{ form.email.label(class="form-control-label") }}
                     {% if form.email.errors %}
@@ -42,11 +46,16 @@
                 </div>
                 
             </fieldset>
+            <!-- Submit button -->
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
         </form>
+
+        
+<!--  Delete account form -->
 <h2>Delete Account</h2>
+
 <form method="POST", action="/delete_account" id="delete-account-form">
     <button type="button" onclick="confirmDelete()" >Delete Account</button>
 </form>

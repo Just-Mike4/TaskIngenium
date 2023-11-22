@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
+<!-- Reset token form -->
 <div class="content-section">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Reset Password</legend>
-
+            
+            <!-- Update password form -->
             <div class="form-group">
                 {{ form.password.label(class="form-control-label") }}
                 {% if form.password.errors %}
@@ -19,6 +21,8 @@
                     {{ form.password(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+
+            <!-- Confirm update password form -->
             <div class="form-group">
                 {{ form.confirm_password.label(class="form-control-label") }}
                 {% if form.confirm_password.errors %}
@@ -34,6 +38,7 @@
             </div>
             
         </fieldset>
+        <!-- Submit button -->
         <div class="form-group">
             {{ form.submit(class="btn btn-outline-info") }}
         </div>

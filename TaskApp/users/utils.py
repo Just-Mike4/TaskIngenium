@@ -3,6 +3,7 @@ from flask_mail import Message
 from TaskApp import mail
 
 
+#Send email after forgotten password is clicked
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Password Reset Request',

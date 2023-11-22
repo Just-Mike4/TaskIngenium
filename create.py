@@ -1,5 +1,7 @@
 from TaskApp import create_app, db
 from sqlalchemy import text
+
+#the application context for creating the database
 app=create_app()
 if __name__ == '__main__':
     app_ctx = app.app_context()

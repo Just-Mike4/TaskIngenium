@@ -9,6 +9,7 @@ from sqlalchemy import text
 
 users=Blueprint('users', __name__)
 
+#The user signup route
 @users.route("/signup", methods=['GET','POST'])
 def signup():
     if current_user.is_authenticated:
@@ -23,6 +24,7 @@ def signup():
         return redirect(url_for('users.login'))
     return render_template('signup.html', title='Register',form=form)
 
+#The user login route
 @users.route("/login",methods=['GET','POST'])
 def login():
     if current_user.is_authenticated:
@@ -38,12 +40,13 @@ def login():
         flash("Login Unsuccessful. Please Check Username And Password","danger")
     return render_template('login.html', title='Login',form=form)
 
-
+#The user logout route
 @users.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('main.home'))
 
+#The user account route
 @users.route("/account", methods=['GET','POST'])
 @login_required
 def account():
@@ -63,7 +66,7 @@ def account():
      return render_template('account.html', title='Account',
                               form=form)
 
-
+#The user reset passowrd route
 @users.route("/reset_password",methods=['GET','POST'])
 def reset_request():
     if current_user.is_authenticated:
@@ -76,6 +79,7 @@ def reset_request():
         return redirect(url_for('user.login'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 
+#The secret reset password route
 @users.route("/reset_password/<token>",methods=['GET','POST'])
 def reset_token(token):
      if current_user.is_authenticated:
@@ -93,7 +97,7 @@ def reset_token(token):
         return redirect(url_for('user.login'))
      return render_template('reset_token.html', title='Reset Password', form=form)
 
-     
+#Delete user account route     
 @users.route('/delete_account', methods=['GET', 'POST'])
 @login_required
 def delete_account():

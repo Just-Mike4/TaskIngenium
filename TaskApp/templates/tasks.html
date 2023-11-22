@@ -1,19 +1,23 @@
 {% extends "layout.html" %}
 {% block content %}
+<!-- Div Section for task list -->
 <div class="content-section">
 
         <h2>Your Tasks</h2>
+        <!-- No task created -->
         {% if tasks==[] %}
         <p>No tasks created yet</p>
+        <!-- Button to create new task -->
         <a href="{{ url_for('tasks.create_task') }}" class="btn btn-primary">Create New Task</a>
         {% else %}
-        
+        <!-- Lists of users task -->
         <ul>
             {% for task in tasks %}
                 <li>
                     <li>
                         <h3><a href="{{ url_for('tasks.task', task_id=task.task_id) }}" class="task-title">{{ task.title }}</a></h3>
-                        <p class="task-description">{{ task.description }}</p>
+                        <p class="task-due_date"> Due Date : {{ task.due_date }}</p>
+                        <p class="task-importance">Importance : {{ task.importance }}</p>
                     </li>
                 </li>
             {% endfor %}

@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
+<!-- Main div container to create task -->
 <div class="content-section">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">{{ legend }}</legend>
 
+            <!-- The title form field -->
             <div class="form-group">
                 {{ form.title.label(class="form-control-label") }}
                 {% if form.title.errors %}
@@ -20,6 +22,7 @@
                 {% endif %}
             </div>
 
+            <!-- The description form field -->
             <div class="form-group">
                 {{ form.description.label(class="form-control-label") }}
                 {% if form.description.errors %}
@@ -33,7 +36,8 @@
                     {{ form.description(class="form-control form-control-lg") }}
                 {% endif %}
                 </div>
-
+                
+                <!-- The due_date form field -->
                 <div class="form-group">
                     {{ form.due_date.label(class="form-control-label") }}
                     {% if form.due_date.errors %}
@@ -47,7 +51,7 @@
                         {{ form.due_date(class="form-control form-control-lg",type="datetime-local") }}
                     {% endif %}
                     </div>
-
+                    <!-- The importance form field -->
                     <div class="form-group">
                         {{ form.importance.label(class="form-control-label") }}
                         {% if form.importance.errors %}
@@ -71,6 +75,7 @@
                     
 
             </fieldset>
+            <!-- Submit button -->
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>

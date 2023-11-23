@@ -55,6 +55,7 @@ class Task(db.Model):
     description = db.Column(db.Text, nullable=False)
     importance=db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    task_secret=db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"

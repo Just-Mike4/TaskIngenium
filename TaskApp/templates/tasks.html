@@ -20,7 +20,7 @@
             {% for task in tasks %}
                 <li>
                     <li>
-                        <h3><a href="{{ url_for('tasks.task', task_id=task.task_id) }}" class="task-title">{{ task.title }}</a></h3>
+                        <h3><a href="{{ url_for('tasks.task', task_secret=task.task_secret) }}" class="task-title">{{ task.title }}</a></h3>
                         <p class="task-due_date"> Due Date : {{ task.due_date }}</p>
                         <p class="task-importance">Importance : {{ task.importance }}</p>
                     </li>

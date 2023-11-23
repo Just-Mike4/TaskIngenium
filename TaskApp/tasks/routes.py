@@ -4,6 +4,8 @@ from TaskApp.tasks.forms import TaskForm
 from flask_login import login_required, current_user
 from TaskApp.models import Task
 from datetime import datetime
+import secrets
+
 tasks=Blueprint('tasks', __name__)
 
 # Task list route: Display all users tasks just title and small description not all and sort by due_date
@@ -13,22 +15,22 @@ def task_list():
     tasks = Task.query.filter_by(user_id=current_user.id).order_by(Task.due_date.desc()).all()
     formatted_tasks = [{'title': task.title,
                         'due_date': task.due_date,
-                        "task_id":task.task_id,
+                        "task_secret":task.task_secret,
                         "importance": task.importance
                         } for task in tasks]
     return render_template("tasks.html", tasks=formatted_tasks, title="Task List")
 
 
 # Route to display the specific task and the information retated to it
-@tasks.route('/tasks/<int:task_id>')
+@tasks.route('/tasks/<task_secret>')
 @login_required
-def task(task_id):
-    task = Task.query.get(task_id)
+def task(task_secret):
+    task = Task.query.filter_by(task_secret=task_secret).first()
     formatted_task = {'title': task.title,
                       'description': task.description,
                       'importance': task.importance,
                       'due_date': task.due_date.strftime('%Y-%m-%d %H:%M'),
-                      "task_id":task.task_id 
+                      "task_secret":task.task_secret 
                       }
     return render_template('task.html', task=formatted_task, title="Task")
 
@@ -42,18 +44,19 @@ def create_task():
                   description=form.description.data,
                   due_date=form.due_date.data,
                   importance=form.importance.data,
-                  user_id=current_user.id
+                  user_id=current_user.id,
+                  task_secret= secrets.token_hex(20)
                   )
         db.session.add(task)
         db.session.commit()
-        return redirect(url_for("tasks.task_list", user_id=current_user.id)) 
+        return redirect(url_for("tasks.task_list")) 
     return render_template("create_task.html", title="New Task", legend="New Task", form=form)
 
 #Route to update tasks
-@tasks.route("/task/<int:task_id>/update_task", methods=["GET","POST"])
+@tasks.route("/task/<task_secret>/update_task", methods=["GET","POST"])
 @login_required
-def update_task(task_id):
-    task=Task.query.get_or_404(task_id)
+def update_task(task_secret):
+    task=Task.query.filter_by(task_secret=task_secret).first_or_404()
     if task.user_id != current_user.id:
         abort(403)
     form=TaskForm()
@@ -75,10 +78,10 @@ def update_task(task_id):
     return render_template("create_task.html", title="Update Task", legend="New Task", form=form)
 
 # Route to handle function to delete task
-@tasks.route("/task/<int:task_id>/delete")
+@tasks.route("/task/<task_secret>/delete")
 @login_required
-def delete_task(task_id):
-    task=Task.query.get_or_404(task_id)
+def delete_task(task_secret):
+    task=Task.query.filter_by(task_secret=task_secret).first_or_404()
     if task.user_id != current_user.id:
         abort(403)
     db.session.delete(task)

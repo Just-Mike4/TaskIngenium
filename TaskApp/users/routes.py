@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from TaskApp import db, bcrypt
-from TaskApp.models import User
+from TaskApp.models import User,Task
 from TaskApp.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm)
 from TaskApp.users.utils import send_reset_email
@@ -103,7 +103,9 @@ def reset_token(token):
 def delete_account():
     if request.method == 'POST':
         user = current_user
-
+        task=Task.query.filter_by(user_id=current_user.id)
+        for t in task:
+            db.session.delete(t)
         db.session.delete(user)
         db.session.commit()
         with db.engine.connect() as connection:

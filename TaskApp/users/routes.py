@@ -76,7 +76,7 @@ def reset_request():
         user=User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
         flash("Your Email has been sent with instructions to reset your password", 'info')
-        return redirect(url_for('user.login'))
+        return redirect(url_for('users.login'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 
 #The secret reset password route
@@ -87,14 +87,14 @@ def reset_token(token):
      user= User.verify_reset_token(token)
      if user is None:
          flash('That is an Invalid or Expired Token', 'warning')
-         return redirect(url_for('user.reset_request'))
+         return redirect(url_for('users.reset_request'))
      form= ResetPasswordForm()
      if form.validate_on_submit():
         hashed_password=bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user.password=hashed_password
         db.session.commit()
         flash('Your Password has been updated! You are now able to  Login ', 'success')
-        return redirect(url_for('user.login'))
+        return redirect(url_for('users.login'))
      return render_template('reset_token.html', title='Reset Password', form=form)
 
 #Delete user account route     

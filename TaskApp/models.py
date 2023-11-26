@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 from TaskApp import db, login_manager
 from flask_login import UserMixin
 from flask import current_app
@@ -50,7 +50,7 @@ class User(db.Model, UserMixin):
 class Task(db.Model):
     task_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
     due_date=db.Column(db.DateTime, nullable=False)
     description = db.Column(db.Text, nullable=False)
     importance=db.Column(db.Integer, nullable=False)

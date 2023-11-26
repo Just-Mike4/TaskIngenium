@@ -5,7 +5,7 @@ from flask_login import login_required, current_user
 from TaskApp.models import Task
 from datetime import datetime
 import secrets
-
+from TaskApp.tasks.utils import send_task_notification
 tasks=Blueprint('tasks', __name__)
 
 # Task list route: Display all users tasks just title and small description not all and sort by due_date
@@ -84,6 +84,7 @@ def task(task_secret):
 @tasks.route("/tasks/create_task", methods=["GET","POST"])
 @login_required
 def create_task():
+    secret=secrets.token_hex(20)
     form=TaskForm()
     if form.validate_on_submit():
         task=Task(title=form.title.data,
@@ -91,11 +92,15 @@ def create_task():
                   due_date=form.due_date.data,
                   importance=form.importance.data,
                   user_id=current_user.id,
-                  task_secret= secrets.token_hex(20),
+                  task_secret= secret,
                   completed=False
                   )
         db.session.add(task)
         db.session.commit()
+        send_task_notification("Task Created",
+                                f"Your task {form.title.data} has been created.",
+                                form.title.data,
+                                    secret)
         return redirect(url_for("tasks.task_list")) 
     return render_template("create_task.html", title="New Task", legend="New Task", form=form)
 

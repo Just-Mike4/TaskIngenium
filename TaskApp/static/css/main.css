@@ -499,3 +499,25 @@ footer small {
 		margin-left: 10px;
 	}
 }
+
+/* TaskNav */
+.navigation{
+	display: flex;
+	justify-self: space-around;
+	margin: 20px 0;
+}
+.navigation a{
+	text-decoration: none;
+	color: #333;
+	padding: 10px;
+	border-radius: 5px;
+}
+.navigation a:hover{
+	background-color: #eee;
+}
+.checkbox{
+	cursor: pointer;
+}
+.tasklist{
+	padding: 30px;
+}

@@ -3,7 +3,14 @@
 
 <!-- Div Section for task list -->
 <div class="content-section">
+    <div class="navigation">
 
+        <a href="/tasks" onclick="showTasks()"> Tasks</a>
+        <a href="/tasks/expired" onclick="showExpiredTasks()">Expired Tasks</a>
+        <a href="/tasks/completed" onclick="showCompletedTasks()">Completed Tasks</a>
+
+    </div>
+   
         <h2>Your Tasks</h2>
 
         <!-- Current time -->
@@ -16,17 +23,23 @@
         <a href="{{ url_for('tasks.create_task') }}" class="btn btn-primary">Create New Task</a>
         {% else %}
         <!-- Lists of users task -->
-        <ul>
+        <ol>
+            
             {% for task in tasks %}
-                <li>
-                    <li>
+            <li>
+                <article class="tasklist">
+                    <div id="taskContainer">
                         <h3><a href="{{ url_for('tasks.task', task_secret=task.task_secret) }}" class="task-title">{{ task.title }}</a></h3>
-                        <p class="task-due_date"> Due Date : {{ task.due_date }}</p>
-                        <p class="task-importance">Importance : {{ task.importance }}</p>
-                    </li>
-                </li>
+                        <input type="checkbox" class="checkbox" data-task-secret="{{ task.task_secret }}">
+                            <p class="task-due_date"> Due Date : {{ task.due_date }}</p>
+                            <p class="task-importance">Importance : {{ task.importance }}</p>
+                    </div>
+                </article>
+            </li>  
+                        
+                    
             {% endfor %}
-        </ul>
+        </ol>
         <a href="{{ url_for('tasks.create_task') }}" class="btn btn-primary">Create New Task</a>
         
         {% endif %}

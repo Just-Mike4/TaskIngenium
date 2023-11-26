@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, redirect, flash, abort, request
+from flask import Blueprint, render_template, url_for, redirect, flash, abort, request, jsonify
 from TaskApp import db
 from TaskApp.tasks.forms import TaskForm
 from flask_login import login_required, current_user
@@ -12,7 +12,9 @@ tasks=Blueprint('tasks', __name__)
 @tasks.route("/tasks")
 @login_required
 def task_list():
-    tasks = Task.query.filter_by(user_id=current_user.id).order_by(Task.due_date.desc()).all()
+    tasks = Task.query.filter_by(user_id=current_user.id)
+    tasks=tasks.filter(Task.due_date > datetime.now() ).filter( Task.completed == False).order_by(Task.due_date.desc()).all()
+
     formatted_tasks = [{'title': task.title,
                         'due_date': task.due_date,
                         "task_secret":task.task_secret,
@@ -20,12 +22,56 @@ def task_list():
                         } for task in tasks]
     return render_template("tasks.html", tasks=formatted_tasks, title="Task List")
 
+# New route to get tasks for a specific view (e.g., "tasks", "expired", "completed")
+@tasks.route("/tasks/<view>")
+@login_required
+def get_tasks_by_view(view):
+    task = Task.query.filter_by(task_secret=view).first()
+    if task:
+        formatted_task = {'title': task.title,
+                        'description': task.description,
+                        'importance': task.importance,
+                        'due_date': task.due_date.strftime('%Y-%m-%d %H:%M'),
+                        "task_secret":task.task_secret 
+                        }
+        return render_template('task.html', task=formatted_task, title="Task")
+    
+    tasks_query = Task.query.filter_by(user_id=current_user.id)
+
+    if view == "expired":
+        tasks_query = tasks_query.filter(Task.due_date < datetime.now()).filter(Task.completed != True)
+    elif view == "completed":
+        tasks_query = tasks_query.filter(Task.completed == True).filter(Task.due_date < datetime.now())
+    
+    tasks = tasks_query.order_by(Task.due_date.desc()).all()
+
+    formatted_tasks = [{'title': task.title,
+                        'due_date': task.due_date,
+                        'task_secret': task.task_secret,
+                        'importance': task.importance
+                        } for task in tasks]
+
+    return render_template("tasks.html", tasks=formatted_tasks, title="Task List")
+
+# Route to handle checkbox and completed tasks
+@tasks.route("/tasks/complete/<task_secret>", methods=["POST"])
+@login_required
+def complete_task(task_secret):
+    task = Task.query.filter_by(task_secret=task_secret, user_id=current_user.id).first_or_404()
+
+    # Toggle the 'completed' field
+    task.completed = not task.completed
+    
+    db.session.commit()
+    
+    return redirect(url_for('tasks.task_list'))
 
 # Route to display the specific task and the information retated to it
 @tasks.route('/tasks/<task_secret>')
 @login_required
 def task(task_secret):
     task = Task.query.filter_by(task_secret=task_secret).first()
+    
     formatted_task = {'title': task.title,
                       'description': task.description,
                       'importance': task.importance,
@@ -45,7 +91,8 @@ def create_task():
                   due_date=form.due_date.data,
                   importance=form.importance.data,
                   user_id=current_user.id,
-                  task_secret= secrets.token_hex(20)
+                  task_secret= secrets.token_hex(20),
+                  completed=False
                   )
         db.session.add(task)
         db.session.commit()

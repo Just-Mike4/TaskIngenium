@@ -1,12 +1,14 @@
-from flask import Blueprint, render_template, url_for, redirect, flash, abort, request, jsonify
+from flask import Blueprint, render_template, url_for, redirect, flash, abort, request, jsonify, current_app
 from TaskApp import db
 from TaskApp.tasks.forms import TaskForm
 from flask_login import login_required, current_user
 from TaskApp.models import Task
 from datetime import datetime
 import secrets
-from TaskApp.tasks.utils import send_task_notification
+from TaskApp.tasks.utils import send_task_notification,delete_expired_tasks
+
 tasks=Blueprint('tasks', __name__)
+
 
 # Task list route: Display all users tasks just title and small description not all and sort by due_date
 @tasks.route("/tasks")
@@ -26,6 +28,10 @@ def task_list():
 @tasks.route("/tasks/<view>")
 @login_required
 def get_tasks_by_view(view):
+    if view == "expired":
+        # Delete expired tasks before fetching the tasks to display
+        delete_expired_tasks()
+        
     task = Task.query.filter_by(task_secret=view).first()
     if task:
         formatted_task = {'title': task.title,
@@ -41,7 +47,7 @@ def get_tasks_by_view(view):
     if view == "expired":
         tasks_query = tasks_query.filter(Task.due_date < datetime.now()).filter(Task.completed != True)
     elif view == "completed":
-        tasks_query = tasks_query.filter(Task.completed == True).filter(Task.due_date < datetime.now())
+        tasks_query = tasks_query.filter(Task.completed == True).filter(Task.due_date > datetime.now())
     
     tasks = tasks_query.order_by(Task.due_date.desc()).all()
 
@@ -97,10 +103,10 @@ def create_task():
                   )
         db.session.add(task)
         db.session.commit()
-        send_task_notification("Task Created",
+        '''send_task_notification("Task Created",
                                 f"Your task {form.title.data} has been created.",
                                 form.title.data,
-                                    secret)
+                                    secret)'''
         return redirect(url_for("tasks.task_list")) 
     return render_template("create_task.html", title="New Task", legend="New Task", form=form)
 

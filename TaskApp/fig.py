@@ -9,3 +9,4 @@ class Config():
     MAIL_PASSWORD = os.environ.get('TASKGENPASS')
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
+    SCHEDULER_API_ENABLED = True

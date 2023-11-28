@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
       checkbox.addEventListener('change', function() {
           let taskSecret = this.getAttribute('data-task-secret');
           updateTaskCompletion(taskSecret, this.checked);
+          location.reload(true);
       });
   });
 });
@@ -68,6 +69,7 @@ function updateTaskCompletion(taskSecret, completed) {
   .then(data => {
       // Handle the response if needed
       console.log(data);
+      
   })
   .catch(error => {
       console.error('There was a problem with the fetch operation:', error);

@@ -20,7 +20,8 @@ def task_list():
     formatted_tasks = [{'title': task.title,
                         'due_date': task.due_date,
                         "task_secret":task.task_secret,
-                        "importance": task.importance
+                        "importance": task.importance,
+                        'complexity':task.complexity
                         } for task in tasks]
     return render_template("tasks.html", tasks=formatted_tasks, title="Task List")
 
@@ -38,7 +39,8 @@ def get_tasks_by_view(view):
                         'description': task.description,
                         'importance': task.importance,
                         'due_date': task.due_date.strftime('%Y-%m-%d %H:%M'),
-                        "task_secret":task.task_secret 
+                        "task_secret":task.task_secret,
+                        'complexity':task.complexity
                         }
         return render_template('task.html', task=formatted_task, title="Task")
     
@@ -82,7 +84,8 @@ def task(task_secret):
                       'description': task.description,
                       'importance': task.importance,
                       'due_date': task.due_date.strftime('%Y-%m-%d %H:%M'),
-                      "task_secret":task.task_secret 
+                      "task_secret":task.task_secret ,
+                      'complexity':task.complexity
                       }
     return render_template('task.html', task=formatted_task, title="Task")
 
@@ -99,14 +102,15 @@ def create_task():
                   importance=form.importance.data,
                   user_id=current_user.id,
                   task_secret= secret,
-                  completed=False
+                  completed=False,
+                  complexity=form.complexity.data
                   )
         db.session.add(task)
         db.session.commit()
-        '''send_task_notification("Task Created",
+        send_task_notification("Task Created",
                                 f"Your task {form.title.data} has been created.",
                                 form.title.data,
-                                    secret)'''
+                                    secret)
         return redirect(url_for("tasks.task_list")) 
     return render_template("create_task.html", title="New Task", legend="New Task", form=form)
 
@@ -123,6 +127,7 @@ def update_task(task_secret):
         task.description=form.description.data
         task.due_date= form.due_date.data
         task.importance=form.importance.data
+        task.complexity=form.complexity.data
         db.session.add(task)
         db.session.commit()
         flash('Your Task Has Been Updated', 'success')
@@ -132,6 +137,7 @@ def update_task(task_secret):
         form.due_date.data=task.due_date
         form.description.data=task.description
         form.importance.data=task.importance
+        form.complexity.data=task.complexity
 
     return render_template("create_task.html", title="Update Task", legend="New Task", form=form)
 

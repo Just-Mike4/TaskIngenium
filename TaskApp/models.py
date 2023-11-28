@@ -53,12 +53,14 @@ class Task(db.Model):
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
     due_date=db.Column(db.DateTime, nullable=False)
     description = db.Column(db.Text, nullable=False)
-    importance=db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    importance=db.Column(db.String, nullable=False)
+    complexity=db.Column(db.String, nullable=False)
     task_secret=db.Column(db.String(20), nullable=False)
     completed = db.Column(db.Boolean, default=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
 
-    def __init__(self, title, due_date, importance, task_secret, completed, user_id, description):
+    def __init__(self, title, due_date, importance, task_secret, completed, user_id, description, complexity):
         self.title = title
         self.due_date = due_date
         self.importance = importance
@@ -66,6 +68,7 @@ class Task(db.Model):
         self.completed = completed
         self.user_id = user_id
         self.description=description
+        self.complexity=complexity
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"

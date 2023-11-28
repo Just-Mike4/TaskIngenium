@@ -7,6 +7,7 @@
     <p>{{ task.description }}</p>
     <p><strong>Importance:</strong> {{ task.importance }}</p>
     <p><strong>Due Date:</strong>{{ task.due_date }}</p>
+    <p ><strong>Complexity: </strong> {{ task.complexity }}</p>
 </div>
 <!-- Update task button -->
 <a href="{{ url_for('tasks.update_task', task_secret=task.task_secret) }}" class="btn btn-primary">Update Task</a>

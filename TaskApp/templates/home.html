@@ -1,7 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
+
+
+<!-- Welcome message -->
+<h4>{% if current_user.is_authenticated %}
+    Welcome, {{ username }}!
+{% endif %} </h4>
+
+
 <!-- Short Writeup for homepage -->
 <article>
+
     <p>TaskGenius is a powerful task management application 
         designed to enhance productivity and streamline the organization 
         of daily responsibilities.TaskGenius goes beyond traditional task managers by offering intelligent task prioritization based on user behavior. 

@@ -62,16 +62,25 @@
                                 {% endfor %}
                             </div>
                         {% else %}
-                            <select name="{{ form.importance.name }}" class="form-control form-control-lg">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                            <p>5 is for highest or very important task</p>
+                            {{ form.importance(class="form-control form-control-lg", id="importance") }}
                         {% endif %}
                     </div>
+
+                    <!-- The complexity form field -->
+                    <div class="form-group">
+                        {{ form.complexity.label(class="form-control-label") }}
+                        {% if form.complexity.errors %}
+                            {{ form.complexity(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.complexity.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.complexity(class="form-control form-control-lg", id="complexity") }}
+                        {% endif %}
+                    </div>
+                    
                     
 
             </fieldset>

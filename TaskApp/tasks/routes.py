@@ -47,7 +47,7 @@ def get_tasks_by_view(view):
     if view == "expired":
         tasks_query = tasks_query.filter(Task.due_date < datetime.now()).filter(Task.completed != True)
     elif view == "completed":
-        tasks_query = tasks_query.filter(Task.completed == True).filter(Task.due_date > datetime.now())
+        tasks_query = tasks_query.filter(Task.completed == True)
     
     tasks = tasks_query.order_by(Task.due_date.desc()).all()
 

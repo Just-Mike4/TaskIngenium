@@ -6,8 +6,9 @@ from datetime import datetime, timedelta
 from TaskApp.models import Task, User
 from TaskApp import db
 
+#Delets task every 24 hours
 def delete_expired_tasks():
-    expiration_limit = datetime.now() - timedelta(hours=1)
+    expiration_limit = datetime.now() - timedelta(hours=24)
     expired_tasks = Task.query.filter(Task.due_date < expiration_limit).filter(Task.completed != True).all()
 
     for task in expired_tasks:
@@ -15,6 +16,7 @@ def delete_expired_tasks():
     
     db.session.commit()
 
+# Function to send task notification when created
 def send_task_notification(subject, body,task_title, task_secret,):
     msg = Message(subject=subject,sender= "noreply@demo.com", recipients=[current_user.email])
     task_url = url_for('tasks.task', task_secret=task_secret, _external=True)
@@ -25,6 +27,7 @@ def send_task_notification(subject, body,task_title, task_secret,):
     msg.body = body
     mail.send(msg)
 
+# Function to send task reminder 1hour till expiration
 def send_task_reminder( mail, task):
     user = User.query.get(task.user_id)
 
@@ -53,7 +56,7 @@ def task_reminder():
         for task in tasks_to_remind:
             send_task_reminder(mail, task)
 
-
+#Job to send mails
 apscheduler.add_job(
     func=task_reminder,  
     trigger='interval',  

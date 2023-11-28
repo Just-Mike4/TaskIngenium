@@ -30,7 +30,9 @@
                 <article class="tasklist">
                     <div id="taskContainer">
                         <h3><a href="{{ url_for('tasks.task', task_secret=task.task_secret) }}" class="task-title">{{ task.title }}</a></h3>
-                        <input type="checkbox" class="checkbox" data-task-secret="{{ task.task_secret }}">
+                        <label>Completed
+                            <input type="checkbox" class="checkbox" data-task-secret="{{ task.task_secret }}">
+                        </label>
                             <p class="task-due_date"> Due Date : {{ task.due_date }}</p>
                             <p class="task-importance">Importance : {{ task.importance }}</p>
                     </div>

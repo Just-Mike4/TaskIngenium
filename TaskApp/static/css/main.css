@@ -68,9 +68,7 @@ section {
 	border-top: 1px solid #edf1f2
 }
 
-/* ==============================================
-   2. Navbar 
-===============================================*/
+/* Nav bar */
 
 .custom-navbar {
 	background-color: #0095f7!important;
@@ -107,174 +105,15 @@ section {
 .navbar a {
 	color: #ffffff !important;
 }
-
+.navbar a:hover {
+	color: #121010 !important;
+}
 .nav-right {
 	float: right;
 }
 
-/* ==============================================
-   3. Buttons
-===============================================*/
 
-.btn {
-	font-size: 14px;
-	font-weight: 400;
-	border-radius: 3px!important;
-	box-shadow: 0 2px 3px 0 rgba(0,0,0,.05), 0 1px 2px 0 rgba(0,0,0,.08);
-}
-
-.btn:hover {
-	text-decoration: none;
-}
-
-.btn-regular {
-	background-color: #0095f7;
-	color: #ffffff;
-	padding: 10px 25px;
-	letter-spacing: .1em;
-	margin-top: 25px;
-	display: inline-block;
-}
-
-.btn-regular:hover {
-	background-color: #0191f0;
-	color: #ffffff;
-}
-
-.btn-demo {
-	color: #ffffff;
-	background-color: #6772e5;
-	letter-spacing: .1em;
-	padding: 15px 48px;
-	display: inline-block;
-	width: 100%;
-	margin-top: 20px;
-}
-
-.btn-demo:hover {
-	color: #ffffff;
-	background-color: #636ee1;
-}
-
-.btn-demo-small {
-	font-size: 12px;
-	background-color: #6772e5;
-	padding: 1px 4px;
-}
-
-.btn-demo-small:hover {
-	background-color: #636ee1;
-}
-
-.btn-demo-small a {
-	color: #ffffff!important;
-}
-
-.btn-buy {
-	color: #ffffff;
-	background-color: #0095f7;
-	letter-spacing: .1em;
-	padding: 15px 48px;
-	display: inline-block;
-	width: 100%;
-	margin-top: 20px;
-}
-
-.btn-buy:hover {
-	background-color: #0191f0;
-	color: #ffffff;
-}
-
-/* ==============================================
-   4. Hero
-===============================================*/
-
-#hero {
-	background-color: #f6f8f9;
-}
-
-#hero h1 {
-	font-size: 50px;
-	font-weight: 300;
-}
-
-#hero p {
-	font-size: 24px;
-    font-weight: 300;
-    color: #8da2b5;
-    margin-bottom: 0px;
-    padding: 0px;
-}
-
-#hero span {
-	font-weight: 400;
-    color: #0095f7;
-    text-transform: uppercase;
-    letter-spacing: .05em;
-}
-
-/* ==============================================
-   5. Marketing
-===============================================*/
-
-#marketing p {
-	font-size: 20px;
-    font-weight: 300;
-    color: #8da2b5;
-    margin-bottom: 0px;
-    padding: 0px;
-}
-
-#marketing span {
-	font-weight: 400;
-	color: #0095f7;
-	text-transform: uppercase;
-	letter-spacing: .05em;
-}
-
-.content-box {
-	padding: 60px 20px;
-}
-
-
-/* ==============================================
-   8. Call to Action
-===============================================*/
-
-#call-to-action {
-	background-image: url('images/call-to-action.png');
-	background-repeat: no-repeat;
-	background-size: cover;
-	height: 100%;
-}
-
-#call-to-action h2 {
-	color: #ffffff;
-}
-
-#call-to-action p {
-	font-size: 20px;
-	font-weight: 300;
-	color: #ffffff;
-	opacity: .8;
-	margin-bottom: 40px;
-}
-
-#call-to-action .title-block {
-	margin-bottom: 0px;
-}
-
-#call-to-action .btn-regular {
-	background-color: #ffffff!important;
-	color: #0095f7!important;
-	padding: 15px 45px;
-}
-
-
-
-/* ==============================================
-   9. Footer
-===============================================*/
+/* Footer  */
 
 footer {
 	background-color: #292c31;
@@ -297,32 +136,6 @@ footer p {
 	padding: 0px;
 }
 
-footer li {
-	font-size: 14px;
-	font-weight: 300;
-	letter-spacing: .05em;
-	line-height: 1.5;
-	margin-bottom: 10px;
-}
-
-footer a {
-	color: #62656a;
-}
-
-footer a:hover {
-	color: #0095f7;
-	text-decoration: none;
-}
-
-footer i {
-	font-size: 25px;
-	color: #62656a;
-	margin-right: 10px;
-}
-
-footer i:hover {
-	color: #0095f7;
-}
 
 footer small {
 	color: #62656a;
@@ -331,173 +144,6 @@ footer small {
 
 .external-links {
 	color: #0095f7;
-}
-
-/* ==============================================
-   9. Media Queries
-===============================================*/
-
-/* Extra small devices (portrait phones, less than 576px) */
-@media (max-width: 575.98px) { 
-	h2 {
-		font-size: 34px!important;
-		margin-bottom: 20px;
-		line-height: 1.6;
-	}
-	.title-block h2, p {
-		text-align: left;
-		padding: 0px 20px;
-	}
-
-	#call-to-action h2, p {
-		text-align: left!important;
-		padding: 0 20px;
-	}
-
-	#call-to-action {
-		background-image: none;
-		background-color: #0095f7;
-	}
-
-	footer {
-		padding: 60px 25px;
-	}
-	footer h5 {
-		font-size: 18px;
-		margin-top: 30px;
-	}
-	footer li {
-		font-size: 16px;
-		margin-bottom: 15px;
-	}
-	footer p {
-		font-size: 16px;
-	}
-	footer i {
-		font-size: 30px;
-		margin-right: 20px;
-	}
-	footer small {
-		float: left;
-		margin-top: 20px;
-	}
-}
-
-@media (max-width: 768px) { 
-	#hero h1 {
-		font-size: 34px!important;
-		margin-bottom: 20px;
-	}
-	#hero p {
-		font-size: 20px!important;
-	}
-}
-
-@media (max-width: 991px) { 
-	.nav-right {
-		float: left;
-	}
-	.nav-custom-link {
-		border-bottom: 1px solid #EEE;
-	}
-	.navbar-nav{
-		width: 100%;
-	}
-	.navbar-nav .nav-link {
-		padding: 20px 0;
-		text-align: left;
-	}
-
-	.btn-demo-small {
-		background-color: #ffffff;
-		border: 0px;
-		padding: 0px;
-		box-shadow: none;
-
-	}
-	.btn-demo-small:hover {
-		background-color: #ffffff;
-		border: 0px;
-		padding: 0px;
-		box-shadow: none;
-
-	}
-	.btn-demo-small a {
-		color: #53627C!important;
-	}
-
-
-	.icon-mobile {
-		font-size: 18px;
-		float: right;
-	}
-
-	.navbar-collapse {
-		border-bottom: 1px solid #efefef;
-	}
-
-	.nav-logo-mobile {
-		margin: auto;
-		padding-right: 50px;
-	}
-
-	.nav-logo-desktop {
-		display: none;
-	}
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) { 
-	.icon-mobile {
-		display: none;
-	}
-	.nav-logo-mobile {
-		display: none;
-	}
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) { 
-	.hero-content {
-		margin-top: 100px;
-	}
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) { 
-	.pricing-box h3 {
-		font-size: 17px;
-	}
-	.pricing-box p {
-		font-size: 14px;
-	}
-	.pricing-box li {
-		font-size: 12px;
-	}
-	.btn-buy {
-		font-size: 12px;
-		padding: 15px 20px;
-	}
-	.btn-demo {
-		font-size: 12px;
-		padding: 15px 20px;
-	}
-	.profile-picture {
-		width: 50px;
-		height: 50px;
-	}
-	.testimonial-box h6 {
-		font-size: 14px;
-		margin-left: 10px;
-	}
-	.testimonial-box span {
-		font-size: 12px;
-	}
-	.testimonial-box small {
-		font-size: 12px;
-		margin-top: 4px;
-		margin-left: 10px;
-	}
 }
 
 /* TaskNav */
@@ -520,4 +166,52 @@ footer small {
 }
 .tasklist{
 	padding: 30px;
+}
+
+
+/* media */
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+	h2 {
+		font-size: 34px!important;
+		margin-bottom: 20px;
+		line-height: 1.6;
+	}
+	.title-block h2, p {
+		text-align: left;
+		padding: 0px 20px;
+	}
+
+	
+	footer {
+		padding: 60px 25px;
+	}
+	footer h5 {
+		font-size: 18px;
+		margin-top: 30px;
+	}
+	footer p {
+		font-size: 16px;
+	}
+	footer small {
+		float: left;
+		margin-top: 20px;
+	}
+}
+
+@media (max-width: 991px) { 
+	.nav-right {
+		float: left;
+	}
+	.nav-custom-link {
+		border-bottom: 1px solid #EEE;
+	}
+	.navbar-nav{
+		width: 100%;
+	}
+	.navbar-nav .nav-link {
+		padding: 20px 0;
+		text-align: left;
+	}
+
 }

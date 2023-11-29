@@ -15,7 +15,7 @@ tasks=Blueprint('tasks', __name__)
 @login_required
 def task_list():
     tasks = Task.query.filter_by(user_id=current_user.id)
-    tasks=tasks.filter(Task.due_date > datetime.now() ).filter( Task.completed == False).order_by(Task.due_date.desc()).all()
+    tasks=tasks.filter(Task.due_date > datetime.now() ).filter( Task.completed == False).order_by(Task.due_date).all()
 
     formatted_tasks = [{'title': task.title,
                         'due_date': task.due_date,

@@ -5,6 +5,7 @@ from flask import url_for
 from datetime import datetime, timedelta
 from TaskApp.models import Task, User
 from TaskApp import db
+from sqlalchemy import func
 
 #Delets task every 24 hours
 def delete_expired_tasks():
@@ -50,16 +51,23 @@ def task_reminder():
     with apscheduler.app.app_context():
         # Get tasks that are about to expire in 1 hour
         expiration_limit = datetime.now() + timedelta(hours=1)
-        tasks_to_remind = Task.query.filter(Task.due_date.between(datetime.now(), expiration_limit)).all()
+        print(expiration_limit)
+
+        # Get tasks whose due date is within the next hour
+        tasks_to_remind = Task.query.filter(
+            Task.due_date > datetime.now(),
+            Task.due_date <= expiration_limit
+        ).all()
+        print(tasks_to_remind)
 
         # Send reminder for each task
         for task in tasks_to_remind:
             send_task_reminder(mail, task)
 
-#Job to send mails
+# Job to send mails
 apscheduler.add_job(
-    func=task_reminder,  
-    trigger='interval',  
+    func=task_reminder,
+    trigger='interval',
     hours=1,  
-    id='task_reminder'  
+    id='task_reminder'
 )

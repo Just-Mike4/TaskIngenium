@@ -8,59 +8,50 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
         <!-- Bootstrap css -->
+    
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+
+
         <title>{{ title }}</title>
+       
         <!-- Navigation bar -->
-        <nav class="navbar navbar-default navbar-expand-lg fixed-top custom-navbar">
+        <nav >
             <h1> {{ title }} </h1>
-            <ul class="navbar-nav ml-auto nav-right" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+            <ul >
                 {% if current_user.is_authenticated %}
-                <li class="nav-item nav-custom-link">
-                  <a class="nav-link" href="{{ url_for('main.home')}}">Home <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                <li >
+                  <a  href="{{ url_for('main.home')}}">Home </a>
                 </li>
-                <li class="nav-item nav-custom-link">
-                  <a class="nav-link" href="{{ url_for('users.account')}}">Account <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                <li >
+                  <a  href="{{ url_for('users.account')}}">Account </a>
                 </li>
-                <li class="nav-item nav-custom-link">
-                  <a class="nav-link" href="{{ url_for('tasks.task_list')}}">tasks<i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                <li >
+                  <a  href="{{ url_for('tasks.task_list')}}">tasks</a>
                 </li>
-                <li class="nav-item nav-custom-link">
-                  <a class="nav-link" href="{{ url_for('users.logout')}}">Logout <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                <li >
+                  <a  href="{{ url_for('users.logout')}}">Logout </a>
                 </li>
 
                 {% else %}
-                <li class="nav-item nav-custom-link">
-                  <a class="nav-link" href="{{ url_for('main.home')}}">Home <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                <li >
+                  <a  href="{{ url_for('main.home')}}">Home </a>
                 </li>
-                <li class="nav-item nav-custom-link">
-                  <a class="nav-link" href="{{ url_for('users.signup')}}">Signup <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                <li >
+                  <a  href="{{ url_for('users.signup')}}">Signup </a>
                 </li>
-                <li class="nav-item nav-custom-link">
-                  <a class="nav-link" href="{{ url_for('users.login')}}">Login <i class="icon ion-ios-arrow-forward icon-mobile"></i></a>
+                <li >
+                  <a  href="{{ url_for('users.login')}}">Login </a>
                 </li>
                 {% endif %}
-                  
-
-
-                  
+ 
                 </ul>
-              </div>
-            </div>
-          </nav>
-          
+              
+          </nav>      
     </head>
-
     <body>
-      
-       
-        
-  <!-- N A V B A R -->
-  
-       
-            
-            <!-- Flashed messages -->
-            <section>
+  <!-- Flashed messages -->
+            <section >
               {% with messages= get_flashed_messages(with_categories=True) %}
               {% if messages %}
                 {% for category, message in messages %}
@@ -75,11 +66,7 @@
                 {% block content %}{% endblock %}
             </section>
                
-           
-                
-           
-            
-            
+
             <footer>
         
                 <div class="col-md-3">
@@ -92,7 +79,8 @@
               
             </div>
           </footer>
-           
+         
+                
           
     </body>
 </html>

@@ -17,4 +17,5 @@ TaskIngenium aims to facilitate effective task management for individuals on a d
 3. **User Account Update Capabilities:** Allowing users to modify their account details.
 4. **CRUD Operations for Tasks:** Create, Read, Update, and Delete operations for managing tasks.
 5. **Background Scheduler:** Implementation of a scheduler triggering email notifications one hour before a task expires.
-6. **Task Lists:** Organizing tasks, expired task lists, and tracking completed tasks.
+6. **RESTful API**: Integration of a RESTful API for external applications to perform CRUD operations on tasks.
+7. **Task Lists:** Organizing tasks, expired task lists, and tracking completed tasks.

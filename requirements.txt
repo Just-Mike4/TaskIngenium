@@ -5,7 +5,7 @@ flask_sqlalchemy==3.1.1
 Flask_WTF==1.1.1
 PyJWT == 1.7.1
 SQLAlchemy==2.0.21
-Werkzeug==2.3.7
+Werkzeug==2.3.8
 WTForms==3.0.1
 Flask-Mail==0.9.1
 flask_apscheduler==1.13.1

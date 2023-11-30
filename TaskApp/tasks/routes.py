@@ -56,7 +56,8 @@ def get_tasks_by_view(view):
     formatted_tasks = [{'title': task.title,
                         'due_date': task.due_date,
                         'task_secret': task.task_secret,
-                        'importance': task.importance
+                        'importance': task.importance,
+                        'complexity':task.complexity
                         } for task in tasks]
 
     return render_template("tasks.html", tasks=formatted_tasks, title="Task List")

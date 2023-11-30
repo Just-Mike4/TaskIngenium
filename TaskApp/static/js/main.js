@@ -75,3 +75,17 @@ function updateTaskCompletion(taskSecret, completed) {
       console.error('There was a problem with the fetch operation:', error);
   });
 }
+const currentPath = window.location.pathname;
+
+// Function to highlight the active link
+function highlightActiveLink() {
+    const links = document.querySelectorAll('.navigation a');
+    links.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Call the function to highlight the active link
+highlightActiveLink();

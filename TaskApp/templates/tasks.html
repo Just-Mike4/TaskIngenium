@@ -1,53 +1,58 @@
 {% extends "layout.html" %}
+
 {% block content %}
-
-<!-- Div Section for task list -->
-<div class="content-section">
-    <div class="navigation">
-
-        <a href="/tasks" onclick="showTasks()"> Tasks</a>
-        <a href="/tasks/expired" onclick="showExpiredTasks()">Expired Tasks</a>
-        <a href="/tasks/completed" onclick="showCompletedTasks()">Completed Tasks</a>
-
+<div class="app">
+    <div class="menu-toggle" onclick="toggleSidebar()">
+        <div class="hamburger">
+            <span></span>
+        </div>
     </div>
-   
-        <h2>Your Tasks</h2>
 
+    <aside class="sidebar">
+        <div class="navigation">
+            <a href="/tasks" id="tasksLink" onclick="showTasks()">Tasks</a>
+            <a href="/tasks/expired" id="expiredTasksLink" onclick="showExpiredTasks()">Expired Tasks</a>
+            <a href="/tasks/completed" id="completedTasksLink" onclick="showCompletedTasks()">Completed Tasks</a>
+        </div>
+    </aside>
+
+    <main class="content-section">
+       
+       
+        <h2>Your Tasks</h2>
+    
         <!-- Current time -->
         <p>Current time :<span id="datetime"></span> </p>
+    
         <!-- No task created -->
-        
         {% if tasks==[] %}
-        <p>No tasks created yet</p>
-        <!-- Button to create new task -->
-        <a href="{{ url_for('tasks.create_task') }}" class="btn btn-primary">Create New Task</a>
+            <p>No tasks created yet</p>
+            <!-- Button to create new task -->
+            <a href="{{ url_for('tasks.create_task') }}" class="btn btn-primary">Create New Task</a>
         {% else %}
-        <!-- Lists of users task -->
-        <ol>
-            
-            {% for task in tasks %}
-            <li>
-                <article class="tasklist">
-                    <div id="taskContainer">
-                        <h3><a href="{{ url_for('tasks.task', task_secret=task.task_secret) }}" class="task-title">{{ task.title }}</a></h3>
-                        <label>Completed
-                            <input type="checkbox" class="checkbox" data-task-secret="{{ task.task_secret }}">
-                        </label>
-                            <p class="task-due_date"> Due Date : {{ task.due_date }}</p>
-                            <p class="task-importance">Importance : {{ task.importance }}</p>
-                            <p class="task-complexity">Complexity : {{ task.complexity }}</p>
-
-                    </div>
-                </article>
-            </li>  
-                        
-                    
-            {% endfor %}
-        </ol>
-        <a href="{{ url_for('tasks.create_task') }}" class="btn btn-primary">Create New Task</a>
-        
+            <!-- Lists of users task -->
+            <ol>
+                {% for task in tasks %}
+                    <li>
+                        <article class="tasklist">
+                            <div id="taskContainer">
+                                <h3><a href="{{ url_for('tasks.task', task_secret=task.task_secret) }}" class="task-title">{{ task.title }}</a></h3>
+                                <label>Completed
+                                    <input type="checkbox" class="checkbox" data-task-secret="{{ task.task_secret }}">
+                                </label>
+                                <p class="task-due_date"> Due Date : {{ task.due_date }}</p>
+                                <p class="task-importance">Importance : {{ task.importance }}</p>
+                                <p class="task-complexity">Complexity : {{ task.complexity }}</p>
+                            </div>
+                        </article>
+                    </li>  
+                {% endfor %}
+            </ol>
+            <a href="{{ url_for('tasks.create_task') }}" class="btn btn-primary">Create New Task</a>
         {% endif %}
+    </main>
 </div>
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock content %}

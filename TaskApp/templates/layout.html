@@ -1,86 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-      <link rel="shorcut icon" href="/static/favicon.ico"/>
-        <meta charset="UTF-8">
+
+<head>
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>{{ title }}</title>
+</head>
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<body>
 
-        <!-- Bootstrap css -->
-    
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Navigation bar -->
+    <nav style="text-align: center;">
+        <h1 > {{ title }} </h1>
+        <ul>
+            {% if current_user.is_authenticated %}
+            <li>
+                <a href="{{ url_for('main.home')}}">Home </a>
+            </li>
 
+            <li>
+                <a href="{{ url_for('users.account')}}">Account </a>
+            </li>
 
+            <li>
+                <a href="{{ url_for('tasks.task_list')}}">Tasks</a>
+            </li>
 
-        <title>{{ title }}</title>
-       
-        <!-- Navigation bar -->
-        <nav >
-            <h1> {{ title }} </h1>
-            <ul >
-                {% if current_user.is_authenticated %}
-                <li >
-                  <a  href="{{ url_for('main.home')}}">Home </a>
-                </li>
-                <li >
-                  <a  href="{{ url_for('users.account')}}">Account </a>
-                </li>
-                <li >
-                  <a  href="{{ url_for('tasks.task_list')}}">tasks</a>
-                </li>
-                <li >
-                  <a  href="{{ url_for('users.logout')}}">Logout </a>
-                </li>
+            <li>
+                <a href="{{ url_for('users.logout')}}">Logout </a>
+            </li>
 
-                {% else %}
-                <li >
-                  <a  href="{{ url_for('main.home')}}">Home </a>
-                </li>
-                <li >
-                  <a  href="{{ url_for('users.signup')}}">Signup </a>
-                </li>
-                <li >
-                  <a  href="{{ url_for('users.login')}}">Login </a>
-                </li>
-                {% endif %}
- 
-                </ul>
-              
-          </nav>      
-    </head>
-    <body>
-  <!-- Flashed messages -->
-            <section >
-              {% with messages= get_flashed_messages(with_categories=True) %}
-              {% if messages %}
-                {% for category, message in messages %}
-                 <div class="alert alert-{{ category }}">
-                {{ message }}
+            {% else %}
+            <li>
+                <a href="{{ url_for('main.home')}}">Home </a>
+            </li>
+            <li>
+                <a href="{{ url_for('users.signup')}}">Signup </a>
+            </li>
+            <li>
+                <a href="{{ url_for('users.login')}}">Login </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
 
-                  </div>
-                {% endfor %}
-              {% endif %}
-            {% endwith %}
-            <!-- Block content section where all html are liked to the layout -->
-                {% block content %}{% endblock %}
-            </section>
-               
+    <!-- Flashed messages -->
+    <section class="main-content">
+        {% with messages= get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
 
-            <footer>
-        
-                <div class="col-md-3">
-                  <h5>TaskIngenium</h5>
-                  <p>Contact us</p>
-                  <p>+234 9125090790</p>
-                  <p><a href="michael.c.ezeana@gmail.com" class="external-links">michael.c.ezeana@gmail.com</a></p>
-                </div>
-              </div> 
-              
-            </div>
-          </footer>
-         
-                
-          
-    </body>
+        {% block content %}
+        <!-- Block content section where all HTML is linked to the layout -->
+        {% endblock %}
+    </section>
+
+    <footer>
+        <div>
+            <h5>TaskIngenium</h5>
+            <p>Contact us: +234 9125090790</p>
+            <p><a href="mailto:michael.c.ezeana@gmail.com" class="external-links">michael.c.ezeana@gmail.com</a></p>
+        </div>
+    </footer>
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>

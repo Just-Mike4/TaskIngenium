@@ -51,14 +51,14 @@ def task_reminder():
     with apscheduler.app.app_context():
         # Get tasks that are about to expire in 1 hour
         expiration_limit = datetime.now() + timedelta(hours=1)
-        print(expiration_limit)
+        
 
         # Get tasks whose due date is within the next hour
         tasks_to_remind = Task.query.filter(
             Task.due_date > datetime.now(),
             Task.due_date <= expiration_limit
         ).all()
-        print(tasks_to_remind)
+        
 
         # Send reminder for each task
         for task in tasks_to_remind:

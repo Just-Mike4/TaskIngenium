@@ -10,7 +10,7 @@ def home():
     # Display welcome (username) if user is logged in
     if current_user.is_authenticated:
         username = current_user.username
-        return render_template('home.html', title="TaskIngenium", username=username)
+        return render_template('home.html', title="TASKINGENIUM", username=username)
     else:
-        return render_template('home.html', title="TaskIngenium")
+        return render_template('home.html', title="TASKINGENIUM")
 
